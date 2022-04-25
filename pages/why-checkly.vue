@@ -399,8 +399,8 @@ export default {
       }
     },
     mouseLeaveVideo() {
-      if (isPlaying) {
-        hoverVideo = false
+      if (this.isPlaying) {
+        this.hoverVideo = false
       }
     },
   },
