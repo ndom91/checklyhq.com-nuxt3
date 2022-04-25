@@ -1,4 +1,4 @@
-<img width="96px" height="96px" align="right" src="static/logo.svg" alt="Checkly Logo" />
+<img width="96px" height="96px" align="right" src="public/logo.svg" alt="Checkly Logo" />
 
 # Checkly Homepage
 
