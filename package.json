@@ -26,7 +26,7 @@
     },
     "extends": [
       "eslint:recommended",
-      "plugin:vue/vue3-recommend",
+      "plugin:vue/vue3-recommended",
       "plugin:prettier/recommended"
     ],
     "parserOptions": {
@@ -37,9 +37,7 @@
       "vue",
       "prettier"
     ],
-    "rules": {
-      "no-unused-vars": "warn"
-    }
+    "rules": {}
   },
   "prettier": {
     "semi": false,
