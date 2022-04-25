@@ -1,8 +1,8 @@
 <template>
-  <nav class="navbar navbar-home navbar-toggleable-md">
-    <div class="container">
+  <nav class="px-8 z-100 bg-white">
+    <div class="flex">
       <button
-        class="navbar-toggler navbar-toggler-right"
+        class="block w-4 h-4 mb-1"
         type="button"
         data-toggle="collapse"
         data-target="#navbarSupportedContent"
@@ -10,7 +10,7 @@
         <span /><span /><span />
       </button>
       <NuxtLink class="navbar-brand mr-2" to="/" aria-label="Home">
-        <TextRaccoonLogo width="120px" height="42px" alt="Checkly Logo" />
+        <TextRaccoonLogo alt="Checkly Logo" />
       </NuxtLink>
       <div id="navbarSupportedContent" class="collapse navbar-collapse">
         <ul class="navbar-nav ml-auto">
@@ -220,41 +220,23 @@
   </nav>
 </template>
 
-<script>
-import TextRaccoonLogo from '@@/static/images/text_racoon_logo.svg?inline'
-import ApiLogo from '@@/static/images/icons/api.svg?inline'
-import ChromeLogo from '@@/static/images/icons/chrome.svg?inline'
-import AlertLogo from '@@/static/images/icons/alert.svg?inline'
-import LearnAutomationLogo from '@@/static/images/icons/learn-puppeteer-playwright.svg?inline'
-import BlogLogo from '@@/static/images/icons/blog-icon.svg?inline'
-import GuidesLogo from '@@/static/images/icons/guides.svg?inline'
-import IntegrationLogo from '@@/static/images/icons/integration.svg?inline'
-import ArrowRightLogo from '@@/static/images/icons/arrow-right.svg?inline'
+<script setup>
+import { reactive } from 'vue'
+import TextRaccoonLogo from '~/assets/images/text_racoon_logo.svg'
+import ApiLogo from '~/assets/images/icons/api.svg'
+import ChromeLogo from '~/assets/images/icons/chrome.svg'
+import AlertLogo from '~/assets/images/icons/alert.svg'
+import LearnAutomationLogo from '~/assets/images/icons/learn-puppeteer-playwright.svg'
+import BlogLogo from '~/assets/images/icons/blog-icon.svg'
+import GuidesLogo from '~/assets/images/icons/guides.svg'
+import IntegrationLogo from '~/assets/images/icons/integration.svg'
+import ArrowRightLogo from '~/assets/images/icons/arrow-right.svg'
 
-export default {
-  name: 'Navbar',
-  components: {
-    TextRaccoonLogo,
-    ApiLogo,
-    ChromeLogo,
-    AlertLogo,
-    LearnAutomationLogo,
-    BlogLogo,
-    GuidesLogo,
-    ArrowRightLogo,
-    IntegrationLogo,
-  },
-  data() {
-    return {
-      isHoveringProduct: false,
-      isHoveringLearn: false,
-    }
-  },
-  computed: {
-    hasAccount() {
-      if (typeof document === 'undefined') return false
-      return document.cookie.match('(^|;) ?checkly_has_account=([^;]*)(;|$)')
-    },
-  },
+const isHoveringProduct = reactive(false)
+const isHoveringLearn = reactive(false)
+
+function hasAccount() {
+  if (typeof document === 'undefined') return false
+  return document.cookie.match('(^|;) ?checkly_has_account=([^;]*)(;|$)')
 }
 </script>

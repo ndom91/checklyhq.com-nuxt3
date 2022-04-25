@@ -210,17 +210,14 @@
   </div>
 </template>
 
-<script>
-import BTabs from 'bootstrap-vue/lib/components/tabs.vue'
-import BTab from 'bootstrap-vue/lib/components/tab.vue'
-import { StartForFree, Footer } from '@/components/common'
+<script setup>
+definePageMeta({
+  title: 'My home page',
+})
 
-export default {
-  name: 'Integration',
-  components: { BTabs, BTab, StartForFree, Footer },
-  async asyncData({ $content, params }) {
-    const integrations = await $content('integrations', params.slug).fetch()
-    return { integrations: integrations[0] }
-  },
-}
+// Fetch 'integrations' page from /content via Nuxt2/Content plugin
+// const asyncData = async ({ $content, params }) => {
+//   const integrations = await $content('integrations', params.slug).fetch()
+//   return { integrations: integrations[0] }
+// }
 </script>
