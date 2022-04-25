@@ -330,79 +330,70 @@
         </div>
       </div>
     </article>
-    <StartForFree />
-    <Footer />
+    <CommonStartForFree />
+    <CommonFooter />
   </div>
 </template>
 
-<script>
-import { Footer, StartForFree } from '~/components/common'
+<script setup>
+async function asyncData({ $content }) {
+  const page = await $content('why-checkly').fetch()
 
-export default {
-  components: { Footer, StartForFree },
-  async asyncData({ $content }) {
-    const page = await $content('why-checkly').fetch()
+  return {
+    page,
+    hero: page[0].hero,
+    feature: page[0].feature,
+    videosection: page[0].videosection,
+    codes: page[0].codes,
+    integrates: page[0].integrates,
+    monitor: page[0].monitor,
+    alerting: page[0].alerting,
+    open: page[0].open,
+    testimonial: page[0].testimonial,
+    scale: page[0].scale,
+  }
+}
 
-    return {
-      page,
-      hero: page[0].hero,
-      feature: page[0].feature,
-      videosection: page[0].videosection,
-      codes: page[0].codes,
-      integrates: page[0].integrates,
-      monitor: page[0].monitor,
-      alerting: page[0].alerting,
-      open: page[0].open,
-      testimonial: page[0].testimonial,
-      scale: page[0].scale,
-    }
-  },
-  data() {
-    return {
-      isPlaying: false,
-      hoverVideo: true,
-    }
-  },
-  created() {
-    this.observer = new IntersectionObserver(
-      (entries, observer) => {
-        entries.forEach((entry) => {
-          if (entry.intersectionRatio > 0) {
-            const playPromise = this.$refs.whyChecklyVideo.play()
-            playPromise
-              .then(() => {
-                this.isPlaying = true
-              })
-              .catch((e) => {
-                this.isPlaying = false
-              })
-          }
-        })
-      },
-      { rootMargin: '0px 0px -200px 0px' }
-    )
-  },
-  mounted() {
-    this.observer.observe(this.$refs.whyChecklyVideo)
-  },
-  methods: {
-    toggleVideo(start) {
-      if (this.observer.intersectionRatio > 0) {
-        return
+const data = {
+  isPlaying: false,
+  hoverVideo: true,
+}
+
+const observer = new IntersectionObserver(
+  (entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.intersectionRatio > 0) {
+        const playPromise = this.$refs.whyChecklyVideo.play()
+        playPromise
+          .then(() => {
+            this.isPlaying = true
+          })
+          .catch((e) => {
+            this.isPlaying = false
+          })
       }
-      if (start) {
-        this.$refs.whyChecklyVideo.play()
-        this.isPlaying = true
-      } else {
-        this.$refs.whyChecklyVideo.pause()
-        this.isPlaying = false
-      }
-    },
-    mouseLeaveVideo() {
-      if (this.isPlaying) {
-        this.hoverVideo = false
-      }
-    },
+    })
   },
+  { rootMargin: '0px 0px -200px 0px' }
+)
+
+observer.observe(this.$refs.whyChecklyVideo)
+
+function toggleVideo(start) {
+  if (this.observer.intersectionRatio > 0) {
+    return
+  }
+  if (start) {
+    this.$refs.whyChecklyVideo.play()
+    this.isPlaying = true
+  } else {
+    this.$refs.whyChecklyVideo.pause()
+    this.isPlaying = false
+  }
+}
+function mouseLeaveVideo() {
+  if (this.isPlaying) {
+    this.hoverVideo = false
+  }
 }
 </script>

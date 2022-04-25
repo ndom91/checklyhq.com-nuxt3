@@ -126,7 +126,9 @@
               <li>
                 <NuxtLink to="/learn/headless">Puppeteer & Playwright</NuxtLink>
               </li>
-              <li><NuxtLink to="/guides">Checkly Guides</NuxtLink></li>
+              <li>
+                <NuxtLink to="/guides">Checkly Guides</NuxtLink>
+              </li>
             </ul>
           </div>
         </div>
@@ -208,45 +210,39 @@
   </footer>
 </template>
 
-<script>
-import FooterLogo from '@@/static/images/footer-logo.svg?inline'
-import GithubLogo from '@@/static/images/github.svg?inline'
-import TwitterLogo from '@@/static/images/twitter.svg?inline'
+<script setup>
+import FooterLogo from '~/assets/images/footer-logo.svg?inline'
+import GithubLogo from '~/assets/images/github.svg?inline'
+import TwitterLogo from '~/assets/images/twitter.svg?inline'
 
-export default {
-  name: 'Footer',
-  components: { FooterLogo, GithubLogo, TwitterLogo },
-  data() {
-    return {
-      statusClass: 'dot--green',
-    }
+const data = {
+  status: {
+    indicator: '',
   },
-  mounted() {
-    this.getChecklyStatus()
-  },
-  methods: {
-    async getChecklyStatus() {
-      const statusUrl = 'https://nq8lf8mrmvw6.statuspage.io/api/v2/status.json'
-      const response = await fetch(statusUrl)
-      const data = await response.json()
-      if (data.status.indicator === 'none') {
-        this.statusClass = 'dot--green'
-      }
-      if (data.status.indicator === 'minor') {
-        this.statusClass = 'dot--yellow'
-      }
-      if (
-        data.status.indicator === 'major' ||
-        data.status.indicator === 'critical'
-      ) {
-        this.statusClass = 'dot--red'
-      }
-    },
-  },
+  statusClass: 'dot--green',
 }
+
+async function getChecklyStatus() {
+  const statusUrl = 'https://nq8lf8mrmvw6.statuspage.io/api/v2/status.json'
+  const response = await fetch(statusUrl)
+  const data = await response.json()
+  if (data.status.indicator === 'none') {
+    data.statusClass = 'dot--green'
+  }
+  if (data.status.indicator === 'minor') {
+    data.statusClass = 'dot--yellow'
+  }
+  if (
+    data.status.indicator === 'major' ||
+    data.status.indicator === 'critical'
+  ) {
+    data.statusClass = 'dot--red'
+  }
+}
+getChecklyStatus()
 </script>
 
-<style lang="scss">
+<style>
 .footer {
   content-visibility: auto;
   contain-intrinsic-size: 600px;

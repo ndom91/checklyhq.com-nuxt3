@@ -207,83 +207,60 @@
         </section>
       </div>
     </div>
-    <StartForFree />
-    <Footer />
+    <CommonStartForFree />
+    <CommonFooter />
   </div>
 </template>
 
-<script>
-import { Footer, StartForFree } from '@/components/common'
-import ArrowUpRight from '@@/static/images/arrow-up-right.svg?inline'
-import ArrowVisit from '@@/static/images/arrow-visit.svg?inline'
-import HeadlessRecorderLogo from '@@/static/opensource/headless_recorder_logo.svg?inline'
-import TerraformLogo from '@@/static/opensource/terraform_logo.svg?inline'
-import GithubStar from '@@/static/images/github-star.svg?inline'
-import ArrowDownload from '@@/static/images/arrow-download.svg?inline'
-import JamLogo from '@@/static/images/jam.svg?inline'
+<script setup>
+import ArrowUpRight from '~/assets/images/arrow-up-right.svg?inline'
+import ArrowVisit from '~/assets/images/arrow-visit.svg?inline'
+import HeadlessRecorderLogo from '~/assets/opensource/headless_recorder_logo.svg?inline'
+import TerraformLogo from '~/assets/opensource/terraform_logo.svg?inline'
+import GithubStar from '~/assets/images/github-star.svg?inline'
+import ArrowDownload from '~/assets/images/arrow-download.svg?inline'
+import JamLogo from '~/assets/images/jam.svg?inline'
 
-export default {
-  name: 'OpenSource',
-  components: {
-    Footer,
-    StartForFree,
-    ArrowUpRight,
-    ArrowVisit,
-    HeadlessRecorderLogo,
-    GithubStar,
-    ArrowDownload,
-    TerraformLogo,
-    JamLogo,
-  },
-  data() {
-    return {
-      posts: [],
-      headlessRecorderStargazers: 0,
-      terraformProviderStargazers: 0,
-      jamstackStargazers: 0,
-    }
-  },
-  async mounted() {
-    this.posts = await this.getLatestPosts()
-    this.headlessRecorderStargazers = await this.getStargazers(
-      'checkly/headless-recorder'
-    )
-    this.terraformProviderStargazers = await this.getStargazers(
-      'checkly/terraform-provider-checkly'
-    )
-    this.jamstackStargazers = await this.getStargazers(
-      'checkly/jamstack-deploy'
-    )
-  },
-  methods: {
-    async getLatestPosts() {
-      const res = await fetch('https://theheadless.dev/rss.xml')
-      const data = await res.text()
-      const parser = new DOMParser()
-      const xmlDoc = parser.parseFromString(data, 'text/xml')
-      const items = xmlDoc.getElementsByTagName('item')
-      return Array.from(items).reduce((articles, item) => {
-        articles.push({
-          title: item.children[0].textContent,
-          link: item.children[1].textContent,
-          guid: item.children[2].textContent,
-          pubdate: item.children[3].textContent,
-          description: item.children[4].textContent,
-        })
-        return articles
-      }, [])
-    },
-    async getStargazers(repo) {
-      const res = await fetch(`https://api.github.com/repos/${repo}`)
-      const data = await res.json()
-      let stars = ''
-      if (data.stargazers_count > 1000) {
-        stars = (data.stargazers_count / 1000).toFixed(1) + 'k'
-      } else {
-        stars = data.stargazers_count
-      }
-      return stars
-    },
-  },
+const data = {
+  posts: [],
+  headlessRecorderStargazers: 0,
+  terraformProviderStargazers: 0,
+  jamstackStargazers: 0,
+}
+data.posts = await getLatestPosts()
+data.headlessRecorderStargazers = await getStargazers(
+  'checkly/headless-recorder'
+)
+data.terraformProviderStargazers = await getStargazers(
+  'checkly/terraform-provider-checkly'
+)
+data.jamstackStargazers = await getStargazers('checkly/jamstack-deploy')
+async function getLatestPosts() {
+  const res = await fetch('https://theheadless.dev/rss.xml')
+  const data = await res.text()
+  const parser = new DOMParser()
+  const xmlDoc = parser.parseFromString(data, 'text/xml')
+  const items = xmlDoc.getElementsByTagName('item')
+  return Array.from(items).reduce((articles, item) => {
+    articles.push({
+      title: item.children[0].textContent,
+      link: item.children[1].textContent,
+      guid: item.children[2].textContent,
+      pubdate: item.children[3].textContent,
+      description: item.children[4].textContent,
+    })
+    return articles
+  }, [])
+}
+async function getStargazers(repo) {
+  const res = await fetch(`https://api.github.com/repos/${repo}`)
+  const data = await res.json()
+  let stars = ''
+  if (data.stargazers_count > 1000) {
+    stars = (data.stargazers_count / 1000).toFixed(1) + 'k'
+  } else {
+    stars = data.stargazers_count
+  }
+  return stars
 }
 </script>

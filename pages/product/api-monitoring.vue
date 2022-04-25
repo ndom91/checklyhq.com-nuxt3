@@ -7,21 +7,17 @@
         </div>
       </div>
     </article>
-    <StartForFree />
-    <Footer />
+    <CommonStartForFree />
+    <CommonFooter />
   </div>
 </template>
 
 <script>
-import { Footer, StartForFree } from '~/components/common'
-export default {
-  components: { Footer, StartForFree },
-  async asyncData({ $content }) {
-    const page = await $content('product/api-monitoring').fetch()
+async function asyncData({ $content }) {
+  const page = await $content('product/api-monitoring').fetch()
 
-    return {
-      page,
-    }
-  },
+  return {
+    page,
+  }
 }
 </script>

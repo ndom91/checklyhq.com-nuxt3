@@ -52,21 +52,15 @@
         </div>
       </div>
     </div>
-    <Footer />
+    <CommonFooter />
   </div>
 </template>
 
-<script>
-import { Footer } from '@/components/common'
-
-export default {
-  name: 'Jobs',
-  components: { Footer },
-  async asyncData({ $content, params }) {
-    const jobs = await $content('jobs')
-      .where({ positionState: { $eq: 'Open' } })
-      .fetch()
-    return { jobs }
-  },
+<script setup>
+async function asyncData({ $content, params }) {
+  const jobs = await $content('jobs')
+    .where({ positionState: { $eq: 'Open' } })
+    .fetch()
+  return { jobs }
 }
 </script>

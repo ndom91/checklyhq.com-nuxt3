@@ -1,11 +1,5 @@
 module.exports = {
-  // TODO: Remove this once BS is gone
-  important: true,
-
-  mode: 'jit',
-  purge: ['./public/index.html', './src/**/*.vue', './src/**/*.js'],
-  prefix: 'rk-',
-  darkMode: false, // or 'media' or 'class'
+  content: ['./public/index.html', './src/**/*.vue', './src/**/*.js'],
   theme: {
     colors: {
       transparent: 'transparent',
@@ -61,12 +55,6 @@ module.exports = {
       xl: '1140px', // default 1280px
       // '2xl': '1536px', disabled until we fix some breaking screens
     },
-  },
-  corePlugins: {
-    preflight: false,
-  },
-  variants: {
-    extend: {},
   },
   plugins: [],
 }

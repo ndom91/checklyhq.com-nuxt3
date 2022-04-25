@@ -194,15 +194,15 @@
       </section>
       <br /><br /><br />
     </div>
-    <Footer />
+    <CommonFooter />
   </div>
 </template>
 
-<script>
-import { Footer } from '@/components/common'
-
-export default {
-  name: 'About',
-  components: { Footer },
-}
-</script>
+<!-- <script> -->
+<!-- import { Footer } from '@/components/common' -->
+<!---->
+<!-- export default { -->
+<!--   name: 'About', -->
+<!--   components: { Footer }, -->
+<!-- } -->
+<!-- </script> -->

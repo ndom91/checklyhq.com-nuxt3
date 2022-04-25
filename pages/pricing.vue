@@ -5,13 +5,7 @@
         <!-- HEADER-->
 
         <div
-          class="
-            pricing__hero
-            d-flex
-            flex-column
-            align-items-center
-            text-center
-          "
+          class="pricing__hero d-flex flex-column align-items-center text-center"
         >
           <h1 class="display-3">Free for developers. Grow as you go.</h1>
           <div class="pricing__lead">
@@ -195,14 +189,7 @@
         <!-- Example CALCULATIONS -->
 
         <div
-          class="
-            d-flex
-            flex-column flex-wrap
-            justify-content-center
-            align-items-center
-            text-center
-            pricing__calculation
-          "
+          class="d-flex flex-column flex-wrap justify-content-center align-items-center text-center pricing__calculation"
         >
           <h2 class="mb-5">How many check runs do I need?</h2>
           <h4 class="mb-5">
@@ -219,11 +206,7 @@
             <div class="text-muted">
               Five checks: 5 x 44,640 =
               <span
-                class="
-                  text-gray-dark
-                  pricing__check-runs-indicator
-                  pricing__check-runs-indicator--secondary
-                "
+                class="text-gray-dark pricing__check-runs-indicator pricing__check-runs-indicator--secondary"
                 >223,200 runs</span
               >
             </div>
@@ -302,7 +285,7 @@
       <!-- SOCIAL PROOF -->
 
       <div class="pricing__testimonials">
-        <TestimonialQuote />
+        <LandingTestimonialQuote />
       </div>
 
       <div class="container">
@@ -532,61 +515,36 @@
         <!-- FAQ -->
 
         <div
-          class="
-            pricing__faq
-            d-flex
-            flex-column
-            justify-content-center
-            text-center
-            mx-auto
-          "
+          class="pricing__faq d-flex flex-column justify-content-center text-center mx-auto"
         >
           <h2 id="faq" class="mb-5">FAQ</h2>
 
           <div v-for="faq of pricingQuestions" :key="faq.q">
-            <FaqToggle :question="faq.q" :answer="faq.a" />
+            <GlobalFaqToggle :question="faq.q" :answer="faq.a" />
           </div>
         </div>
       </div>
 
       <div class="pricing__trial">
-        <StartForFree />
+        <CommonStartForFree />
       </div>
     </div>
-    <Footer />
+    <CommonFooter />
   </div>
 </template>
 
-<script>
-import { Footer, StartForFree } from '@/components/common'
-import { TestimonialQuote } from '@/components/landing'
-import { FaqToggle } from '@/components/global'
-import LoveDevs from '@@/static/images/love-devs.svg?inline'
-import PinkDrop from '@@/static/images/icons/svg/pink-drop.svg?inline'
+<script setup>
+import LoveDevs from '~/assets/images/love-devs.svg?inline'
+import PinkDrop from '~/assets/images/icons/svg/pink-drop.svg?inline'
 
-export default {
-  name: 'Pricing',
-  components: {
-    Footer,
-    StartForFree,
-    TestimonialQuote,
-    FaqToggle,
-    LoveDevs,
-    PinkDrop,
-  },
-  async asyncData({ $content, params }) {
-    const pricing = await $content('data/pricing', params.slug).fetch()
-    return { pricingQuestions: pricing[0].questions }
-  },
-  data() {
-    return {
-      discountOpen: false,
-    }
-  },
-  methods: {
-    toggleDiscount() {
-      this.discountOpen = !this.discountOpen
-    },
-  },
+const data = {
+  discountOpen: false,
+}
+async function asyncData({ $content, params }) {
+  const pricing = await $content('data/pricing', params.slug).fetch()
+  return { pricingQuestions: pricing[0].questions }
+}
+function toggleDiscount() {
+  data.discountOpen = !data.discountOpen
 }
 </script>

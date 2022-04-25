@@ -20,15 +20,15 @@
         </div>
       </div>
     </div>
-    <Footer />
+    <CommonFooter />
   </div>
 </template>
 
-<script>
-import { Footer } from '~/components/common'
-
-export default {
-  name: 'FourOhFour',
-  components: { Footer },
-}
-</script>
+<!-- <script> -->
+<!-- import { Footer } from '~/components/common' -->
+<!---->
+<!-- export default { -->
+<!--   name: 'FourOhFour', -->
+<!--   components: { Footer }, -->
+<!-- } -->
+<!-- </script> -->

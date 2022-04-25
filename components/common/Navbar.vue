@@ -221,7 +221,6 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue'
 import TextRaccoonLogo from '~/assets/images/text_racoon_logo.svg'
 import ApiLogo from '~/assets/images/icons/api.svg'
 import ChromeLogo from '~/assets/images/icons/chrome.svg'
@@ -232,8 +231,8 @@ import GuidesLogo from '~/assets/images/icons/guides.svg'
 import IntegrationLogo from '~/assets/images/icons/integration.svg'
 import ArrowRightLogo from '~/assets/images/icons/arrow-right.svg'
 
-const isHoveringProduct = reactive(false)
-const isHoveringLearn = reactive(false)
+const isHoveringProduct = false
+const isHoveringLearn = false
 
 function hasAccount() {
   if (typeof document === 'undefined') return false

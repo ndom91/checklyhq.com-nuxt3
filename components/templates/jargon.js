@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   recursion:
     '<b>recursion</b> occurs when a thing is defined in terms of itself or of its type.',
   deployment:

@@ -3,21 +3,17 @@
     <article class="container product">
       <nuxt-content :document="page" class="my-5" />
     </article>
-    <StartForFree />
-    <Footer />
+    <CommonStartForFree />
+    <CommonFooter />
   </div>
 </template>
 
-<script>
-import { Footer, StartForFree } from '~/components/common'
-export default {
-  components: { Footer, StartForFree },
-  async asyncData({ $content }) {
-    const page = await $content('product/synthetic-monitoring').fetch()
+<script setup>
+async function asyncData({ $content }) {
+  const page = await $content('product/synthetic-monitoring').fetch()
 
-    return {
-      page,
-    }
-  },
+  return {
+    page,
+  }
 }
 </script>

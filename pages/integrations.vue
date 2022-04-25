@@ -10,14 +10,14 @@
             {{ integrations.heroDescription }}
           </p>
         </div>
-        <b-tabs
+        <CommonTabs
           active-nav-item-class="active"
           local-active="active"
           class="integrations__highlights"
           align="center"
           justified
         >
-          <b-tab
+          <CommonTab
             v-for="(highlight, index) in integrations.highlights"
             :id="`integration-tab-${index}-content`"
             :key="highlight.label"
@@ -27,7 +27,7 @@
           >
             <div class="integrations__highlights__contents">
               <div class="image-wrap">
-                <nuxt-img
+                <img
                   :src="highlight.image"
                   :alt="highlight.title"
                   width="424"
@@ -47,8 +47,8 @@
                 </NuxtLink>
               </div>
             </div>
-          </b-tab>
-        </b-tabs>
+          </CommonTab>
+        </CommonTabs>
         <div class="integrations__subnav">
           <h2 class="display-4 text-center">All Integrations</h2>
           <div class="d-flex">
@@ -67,7 +67,7 @@
               class="card"
             >
               <div class="card__img">
-                <nuxt-img
+                <img
                   :src="alert.icon"
                   :alt="alert.service"
                   width="alert.iconWidth"
@@ -103,7 +103,7 @@
               class="card"
             >
               <div class="card__img">
-                <nuxt-img
+                <img
                   :src="trigger.icon"
                   :alt="trigger.service"
                   width="trigger.iconWidth"
@@ -139,7 +139,7 @@
               class="card"
             >
               <div class="card__img">
-                <nuxt-img
+                <img
                   :src="framework.icon"
                   :alt="framework.service"
                   width="framework.iconWidth"
@@ -204,9 +204,9 @@
           </div>
         </div>
       </div>
-      <StartForFree />
+      <CommonStartForFree />
     </div>
-    <Footer />
+    <CommonFooter />
   </div>
 </template>
 
