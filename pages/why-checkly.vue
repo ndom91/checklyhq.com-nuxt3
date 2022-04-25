@@ -96,11 +96,7 @@
                 <div
                   class="video-wrapper"
                   @mouseenter="hoverVideo = true"
-                  @mouseleave="
-                    if (isPlaying) {
-                      hoverVideo = false
-                    }
-                  "
+                  @mouseleave="mouseLeaveVideo"
                 >
                   <video
                     id="why-checkly-video"
@@ -400,6 +396,11 @@ export default {
       } else {
         this.$refs.whyChecklyVideo.pause()
         this.isPlaying = false
+      }
+    },
+    mouseLeaveVideo() {
+      if (isPlaying) {
+        hoverVideo = false
       }
     },
   },

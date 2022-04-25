@@ -2,9 +2,9 @@
 
 # Checkly Homepage
 
-This repo contains the [Nuxt.js v3](https://nuxtjs.org/) rewrite of the [checklyhq.com](https://checklyhq.com) Marketing Site.
+This repo contains the [Nuxt3](https://nuxtjs.org/) rewrite of the [checklyhq.com](https://checklyhq.com) Marketing Site.
 
-Check out the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
+Check out the [Nuxt3 documentation](https://v3.nuxtjs.org) to learn more.
 
 ## 🏗️ Getting Started
 

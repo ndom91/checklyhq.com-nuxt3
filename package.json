@@ -1,5 +1,8 @@
 {
-  "private": true,
+  "name": "checklyhq.com-nuxt3",
+  "description": "checklyhq.com rewrite with Nuxt3",
+  "license": "MIT",
+  "author": "ndom91 <yo@ndo.dev>",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
@@ -7,6 +10,44 @@
     "preview": "nuxt preview"
   },
   "devDependencies": {
-    "nuxt": "3.0.0-rc.1"
+    "eslint": "^8.14.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-vue": "^8.7.1",
+    "nuxt": "3.0.0-rc.1",
+    "simple-git-hooks": "^2.7.0",
+    "vite-plugin-eslint": "^1.6.0"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "es2021": true,
+      "node": true
+    },
+    "extends": [
+      "eslint:recommended",
+      "plugin:vue/essential",
+      "plugin:prettier/recommended"
+    ],
+    "parserOptions": {
+      "ecmaVersion": "latest",
+      "sourceType": "module"
+    },
+    "plugins": [
+      "vue"
+    ],
+    "rules": {}
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,vue}": [
+      "prettier --write"
+    ]
   }
 }
